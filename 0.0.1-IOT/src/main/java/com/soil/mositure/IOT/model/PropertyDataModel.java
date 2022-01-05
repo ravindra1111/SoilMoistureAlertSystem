@@ -13,16 +13,24 @@ public class PropertyDataModel {
     private boolean data_insertion_status;
     private boolean alert_service_status;
     private int moisture_measure_frequency;
-    private String phone_numbers;
     private int moisture_alert_limit;
 
-    public PropertyDataModel(int sl_num, boolean data_insertion_status, boolean alert_service_status, int moisture_measure_frequency, String phone_numbers, int moisture_alert_limit) {
+    public PropertyDataModel(boolean data_insertion_status, boolean alert_service_status, int moisture_measure_frequency, int moisture_alert_limit) {
+        this.data_insertion_status = data_insertion_status;
+        this.alert_service_status = alert_service_status;
+        this.moisture_measure_frequency = moisture_measure_frequency;
+        this.moisture_alert_limit = moisture_alert_limit;
+    }
+
+    public PropertyDataModel(int sl_num, boolean data_insertion_status, boolean alert_service_status, int moisture_measure_frequency, int moisture_alert_limit) {
         this.sl_num = sl_num;
         this.data_insertion_status = data_insertion_status;
         this.alert_service_status = alert_service_status;
         this.moisture_measure_frequency = moisture_measure_frequency;
-        this.phone_numbers = phone_numbers;
         this.moisture_alert_limit = moisture_alert_limit;
+    }
+
+    public PropertyDataModel() {
     }
 
     public int getSl_num() {
@@ -55,14 +63,6 @@ public class PropertyDataModel {
 
     public void setMoisture_measure_frequency(int moisture_measure_frequency) {
         this.moisture_measure_frequency = moisture_measure_frequency;
-    }
-
-    public String getPhone_numbers() {
-        return phone_numbers;
-    }
-
-    public void setPhone_numbers(String phone_numbers) {
-        this.phone_numbers = phone_numbers;
     }
 
     public int getMoisture_alert_limit() {

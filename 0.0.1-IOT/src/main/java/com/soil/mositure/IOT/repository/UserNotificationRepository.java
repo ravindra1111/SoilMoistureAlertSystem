@@ -1,9 +1,9 @@
 package com.soil.mositure.IOT.repository;
 
-import com.soil.mositure.IOT.model.MoistureDataModel;
+import com.soil.mositure.IOT.model.UserNotificationModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface MoistureDataRepository extends JpaRepository<MoistureDataModel,Integer> {
+public interface UserNotificationRepository extends JpaRepository<UserNotificationModel,Integer> {
 }

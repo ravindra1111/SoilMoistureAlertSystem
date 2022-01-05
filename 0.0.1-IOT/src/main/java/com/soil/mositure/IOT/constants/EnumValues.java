@@ -8,7 +8,8 @@ public class EnumValues {
         ALERT_NOT_NEEDED,
         ALERT_NEEDED,
         ALERT_PROCESSING,
-        ALERT_SENT
+        ALERT_SENT,
+        ALERT_CANT_BE_PROCESSED
 
     }
 }
