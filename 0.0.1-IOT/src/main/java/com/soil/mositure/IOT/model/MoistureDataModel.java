@@ -1,6 +1,9 @@
 package com.soil.mositure.IOT.model;
 
+import org.springframework.dao.DataAccessException;
+
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -11,13 +14,23 @@ public class MoistureDataModel {
     @GeneratedValue
     @Column(unique = true)
     private int entry_id;
-    private Timestamp creation_timestamp=Timestamp.valueOf(LocalDateTime.now());
+    private LocalDateTime creation_timestamp=LocalDateTime.now();
     private float moisture_value;
     private String alert_status;
 
     public MoistureDataModel(float moisture_value, String alert_status) {
         this.moisture_value = moisture_value;
         this.alert_status = alert_status;
+    }
+
+    public MoistureDataModel(int entry_id, LocalDateTime creation_timestamp, float moisture_value, String alert_status) {
+        this.entry_id = entry_id;
+        this.creation_timestamp = creation_timestamp;
+        this.moisture_value = moisture_value;
+        this.alert_status = alert_status;
+    }
+
+    public MoistureDataModel() {
     }
 
     public int getEntry_id() {
@@ -28,11 +41,11 @@ public class MoistureDataModel {
         this.entry_id = entry_id;
     }
 
-    public Timestamp getCreation_timestamp() {
+    public LocalDateTime getCreation_timestamp() {
         return creation_timestamp;
     }
 
-    public void setCreation_timestamp(Timestamp creation_timestamp) {
+    public void setCreation_timestamp(LocalDateTime creation_timestamp) {
         this.creation_timestamp = creation_timestamp;
     }
 

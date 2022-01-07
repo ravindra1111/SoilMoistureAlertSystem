@@ -22,17 +22,22 @@ public class NotificationServiceImpl implements NotificationServices {
     PropertyDataRepository propertyDataRepository;
 
     @Override
-    public boolean sendNotifications(float moistureValue) throws IOException {
+    public boolean sendNotifications(float moistureValue,int moistureLimit) throws IOException {
         PropertyDataModel property = propertyDataRepository.getById(1);
         if (property.isAlert_service_status()) {
             EnumValues.alertStatus val = moistureService.alertService(moistureValue);
             if (val.equals(EnumValues.alertStatus.ALERT_NEEDED) || (val.equals(EnumValues.alertStatus.ALERT_PROCESSING)))
-                telegramNotifService.sendTelegramAlertMessage(moistureValue);
+                telegramNotifService.sendTelegramAlertMessage(moistureValue,moistureLimit);
             else
-                telegramNotifService.sendTelegramSilentMessage(moistureValue);
+                telegramNotifService.sendTelegramSilentMessage(moistureValue,moistureLimit);
             return true;
         }
         else
             return false;
+    }
+
+    @Override
+    public void sendAckNotifications() {
+        telegramNotifService.sendTelegramDeviceConnectedMessage();
     }
 }

@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Service
@@ -38,9 +39,52 @@ public class UserPhoneServiceImpl implements UserPhoneService {
     public boolean deleteUserByPhoneNumber(String phone_num) {
         List<UserNotificationModel> users_data=userNotificationRepository.findAll();
         for(UserNotificationModel user_data:users_data){
-            userNotificationRepository.deleteById(user_data.getUser_id());
-            return true;
+            if(String.valueOf(user_data.getPhone_num()).equalsIgnoreCase(phone_num))
+            {
+                userNotificationRepository.deleteById(user_data.getUser_id());
+                return true;
+            }
         }
         return false;
+    }
+
+    @Override
+    public boolean disableUserByPhoneNumber(String phone_num) {
+        List<UserNotificationModel> users_data=userNotificationRepository.findAll();
+        for(UserNotificationModel user_data:users_data){
+            if(String.valueOf(user_data.getPhone_num()).equalsIgnoreCase(phone_num))
+            {
+                user_data.setUser_enabled(false);
+                userNotificationRepository.save(user_data);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean enableUserByPhoneNumber(String phone_num) {
+        List<UserNotificationModel> users_data=userNotificationRepository.findAll();
+        for(UserNotificationModel user_data:users_data){
+            if(String.valueOf(user_data.getPhone_num()).equalsIgnoreCase(phone_num))
+            {
+                user_data.setUser_enabled(true);
+                userNotificationRepository.save(user_data);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public HashMap<String, String> getEnabledUsersForNotificationServices() {
+        List<UserNotificationModel> users_data=userNotificationRepository.findAll();
+        HashMap<String,String> notificationServiceEnabledUsers=new HashMap<String,String>();
+        for(UserNotificationModel user_data:users_data){
+            if(user_data.isUser_enabled()){
+                notificationServiceEnabledUsers.put(user_data.getPhone_num(),user_data.getTelegram_id());
+            }
+        }
+        return notificationServiceEnabledUsers;
     }
 }

@@ -13,6 +13,7 @@ INSERT INTO property_table(sl_num,alert_service_status,data_insertion_status,moi
 CREATE TABLE IF NOT EXISTS user_notification_service_table(
                             user_id serial PRIMARY KEY,
                             phone_num VARCHAR,
-                            telegram_id VARCHAR);
+                            telegram_id VARCHAR,
+                            user_enabled BOOLEAN);
 
-INSERT INTO user_notification_service_table(user_id,phone_num,telegram_id) VALUES (1,'9493425174','659118748') ON CONFLICT DO NOTHING;
+INSERT INTO user_notification_service_table(user_id,phone_num,telegram_id,user_enabled) VALUES (0,'9493425174','659118748',true) ON CONFLICT DO NOTHING;

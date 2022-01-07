@@ -4,5 +4,6 @@ import java.io.IOException;
 
 public interface NotificationServices {
 
-    boolean sendNotifications(float moistureValue) throws IOException;
+    boolean sendNotifications(float moistureValue,int moistureLimit) throws IOException;
+    void sendAckNotifications();
 }
